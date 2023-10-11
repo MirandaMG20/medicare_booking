@@ -1,4 +1,4 @@
-import React from 'react'
+// import React from 'react'
 import heroImg01 from '../assets/images/hero-img01.png'
 import heroImg02 from '../assets/images/hero-img02.png'
 import heroImg03 from '../assets/images/hero-img03.png'
@@ -142,7 +142,6 @@ const Home = () => {
               </div>
             </div>
 
-            
           </div>
         </div>
       </section>
