@@ -30,7 +30,7 @@ const Home = () => {
                 <button className='btn'>Request an appointment</button>
               </div>
 
-              {/* Hero Counter */}
+              {/* HERO COUNTER */}
               <div className="mt-[30px] lg:mt-[70px] flex flex-col lg:flex-row lg:items-center gap-5 lg:gap-[30px]">
                 <div>
                   <h2 className="text-[36px] leading-[56px] lg:text-[44px] lg:leading-[54px] font-[700] text-headingColor">
@@ -57,7 +57,7 @@ const Home = () => {
                 </div>
               </div>
             </div>
-            {/* Hero Content */}
+            {/* HERO CONTENT */}
 
             <div className="flex gap-[30px] justify-end">
               <div>
@@ -147,7 +147,22 @@ const Home = () => {
         </div>
       </section>
 
+      {/* ABOUT SECTION */}
       <About />
+
+      {/* SERVICES SECTION */}
+      <section>
+        <div className="container">
+          <div className="xl:w-[470px] mx-auto">
+            <h2 className="heading text-center">
+              <p className="text__para text-center">
+                Wold-class care for everyone. Our health system offers unmatched expert health care.
+              </p>
+            </h2>
+          </div>
+        </div>
+      </section>
+      {/* SERVICES SECTION END */}
 
     </>
   )
