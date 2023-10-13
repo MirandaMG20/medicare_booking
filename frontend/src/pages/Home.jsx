@@ -15,6 +15,7 @@ import About from '../components/About/About'
 import ServiceList from '../components/Services/ServiceList'
 import DoctorList from '../components/Doctors/DoctorList'
 import FaqList from '../components/Faq/FaqList'
+import Testimonial from '../components/Testimonial/Testimonial'
 
 const Home = () => {
   return (
@@ -279,6 +280,8 @@ const Home = () => {
               Wold-class care for everyone. Our health system offers unmatched expert health care.
             </p>
           </div>
+
+          <Testimonial />
         </div>
       </section>
       {/* TESTIMONIAL END*/}
