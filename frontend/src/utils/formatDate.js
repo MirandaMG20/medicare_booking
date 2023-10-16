@@ -1,13 +1,7 @@
-import React from 'react'
+export const formatDate = (date, config) => {
 
-const formatDate = (date, config) => {
+    const defaultOptions = { day: 'numeric', month: 'long', year: 'numeric' };
+    const options = config ? config : defaultOptions;
 
-    const defaultOptions = { day: 'numeric', month: 'long', year: 'numeric' }
-    const options = config ? config : defaultOptions
-
-    return (
-        new Date(date).toLocaleDateString('en-US', options)
-    )
-}
-
-export default formatDate
+    return new Date(date).toLocaleDateString('en-US', options);
+};
