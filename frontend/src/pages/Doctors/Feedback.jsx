@@ -18,7 +18,6 @@ const Feedback = () => {
             <figure className='w-10 h-10 rounded-full'>
               <img className="w-full" src={avatar} alt="" />
             </figure>
-
             <div>
               <h5 className="text-[16px] leading-6 text-primaryColor font-bold">
                 Ali Ahmed
@@ -30,14 +29,14 @@ const Feedback = () => {
                 Good services, highly recommended 👍
               </p>
             </div>
-
           </div>
 
           <div className="flex gap-1">
             {[...Array(5).keys()].map((_, index) => (
-              <AiFillStar key={index} color='#0067FF' /> 
+              <AiFillStar key={index} color='#0067FF' />
             ))}
           </div>
+          
         </div>
       </div>
     </div>
