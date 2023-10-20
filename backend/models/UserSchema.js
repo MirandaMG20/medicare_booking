@@ -4,7 +4,7 @@ const UserSchema = new mongoose.Schema(
     {
         name: {
             type: String,
-            required: true
+            required: true,
         },
         email: {
             type: String,
@@ -13,13 +13,13 @@ const UserSchema = new mongoose.Schema(
         },
         password: {
             type: String,
-            required: true
+            required: true,
         },
         phone: {
-            type: Number
+            type: Number,
         },
         photo: {
-            type: String
+            type: String,
         },
         role: {
             type: String,
@@ -28,7 +28,7 @@ const UserSchema = new mongoose.Schema(
         },
         gender: {
             type: String,
-            enum: ["male", "female", "other"]
+            enum: ["male", "female", "other"],
         },
         bloodType: { type: String },
         appointments: [{ type: mongoose.Types.ObjectId, ref: "Appointment" }],

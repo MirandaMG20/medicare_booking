@@ -3,7 +3,11 @@ import Doctor from '../models/DoctorSchema.js'
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
 
-// Register
+const generateToken = user => {
+    return jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET_key)
+}
+
+// Register User
 export const register = async (req, res) => {
 
     const { email, password, name, role, photo, phone, gender } = req.body
@@ -13,9 +17,9 @@ export const register = async (req, res) => {
         let user = null
 
         if (role === 'patient') {
-            user = User.findOne({ email })
+            user = await User.findOne({ email })
         } else if (role === 'doctor') {
-            user = Doctor.findOne({ email })
+            user = await Doctor.findOne({ email })
         }
 
         // Check if user exist
@@ -60,7 +64,37 @@ export const register = async (req, res) => {
 
 // Login
 export const login = async (req, res) => {
+
+    const { email, password } = req.body
+
     try {
+
+        let user = null
+
+        const patient = await User.findOne({ email })
+        const doctor = await Doctor.findOne({ email })
+
+        if (patient) {
+            user = patient
+        }
+        if (doctor) {
+            user = doctor
+        }
+
+        // Check if user exist or not
+        if (!user) {
+            return res.status(404).json({ message: 'User not found.' })
+        }
+
+        // Compare password
+        const isPasswordMatch = await bcrypt.compare(password, user.password)
+
+        if (!isPasswordMatch) {
+            return res.status(400).json({ status: false, message: 'Invalid credentials.' })
+        }
+
+        // Get token
+        const token = generateToken(user)
 
     } catch (err) {
 
