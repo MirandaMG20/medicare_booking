@@ -60,9 +60,17 @@ export const getSingleDoctor = async (req, res) => {
     }
 }
 
-export const getAllDoctor = async (req, res) => {
+export const getAllDoctors = async (req, res) => {
 
     try {
+
+        const { query } = req.query
+        let doctors;
+
+        if (query) {
+            doctors = await Doctor.find({ isApproved: 'approved' })
+        }
+
         const doctors = await Doctor.find({}).select("-password")
 
         res

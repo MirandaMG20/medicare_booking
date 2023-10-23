@@ -61,7 +61,7 @@ export const getSingleUser = async (req, res) => {
     }
 }
 
-export const getAllUser = async (req, res) => {
+export const getAllUsers = async (req, res) => {
 
     try {
         const users = await User.find({}).select("-password")
