@@ -11,8 +11,7 @@ export const updateDoctor = async (req, res) => {
             { new: true }
         )
 
-        res
-            .status(200).json({
+        res.status(200).json({
                 success: true,
                 message: "Successfully update.",
                 data: updateDoctor,
@@ -31,9 +30,7 @@ export const deleteDoctor = async (req, res) => {
             id,
         )
 
-        res
-            .status(200)
-            .json({
+        res.status(200).json({
                 success: true,
                 message: "Successfully deleted.",
             })
@@ -49,8 +46,7 @@ export const getSingleDoctor = async (req, res) => {
     try {
         const doctor = await Doctor.findById(id).select("-password")
 
-        res
-            .status(200).json({
+        res.status(200).json({
                 success: true,
                 message: "Doctor found",
                 data: doctor,
@@ -77,8 +73,7 @@ export const getAllDoctors = async (req, res) => {
             doctors = await Doctor.find({}).select('-password')
         }
 
-        res
-            .status(200).json({
+        res.status(200).json({
                 success: true,
                 message: "Doctors found",
                 data: doctors,

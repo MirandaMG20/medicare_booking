@@ -11,13 +11,11 @@ export const updateUser = async (req, res) => {
             { new: true }
         )
 
-        res
-            .status(200)
-            .json({
-                success: true,
-                message: "Successfully update.",
-                data: updateUser,
-            })
+        res.status(200).json({
+            success: true,
+            message: "Successfully update.",
+            data: updateUser,
+        })
     } catch (err) {
         res.status(500).json({ success: false, message: "Failed to update." })
     }
@@ -32,12 +30,10 @@ export const deleteUser = async (req, res) => {
             id,
         )
 
-        res
-            .status(200)
-            .json({
-                success: true,
-                message: "Successfully deleted.",
-            })
+        res.status(200).json({
+            success: true,
+            message: "Successfully deleted.",
+        })
     } catch (err) {
         res.status(500).json({ success: false, message: "Failed to delete." })
     }
@@ -50,12 +46,11 @@ export const getSingleUser = async (req, res) => {
     try {
         const user = await User.findById(id).select("-password")
 
-        res
-            .status(200).json({
-                success: true,
-                message: "User found",
-                data: user,
-            })
+        res.status(200).json({
+            success: true,
+            message: "User found",
+            data: user,
+        })
     } catch (err) {
         res.status(404).json({ success: false, message: "No user found" })
     }
@@ -66,13 +61,11 @@ export const getAllUsers = async (req, res) => {
     try {
         const users = await User.find({}).select("-password")
 
-        res
-            .status(200)
-            .json({
-                success: true,
-                message: "Users found",
-                data: users,
-            })
+        res.status(200).json({
+            success: true,
+            message: "Users found",
+            data: users,
+        })
     } catch (err) {
         res.status(404).json({ success: false, message: "Users not found" })
     }
