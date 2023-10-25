@@ -12,10 +12,10 @@ export const updateDoctor = async (req, res) => {
         )
 
         res.status(200).json({
-                success: true,
-                message: "Successfully update.",
-                data: updateDoctor,
-            })
+            success: true,
+            message: "Successfully update.",
+            data: updateDoctor,
+        })
     } catch (err) {
         res.status(500).json({ success: false, message: "Failed to update." })
     }
@@ -31,9 +31,9 @@ export const deleteDoctor = async (req, res) => {
         )
 
         res.status(200).json({
-                success: true,
-                message: "Successfully deleted.",
-            })
+            success: true,
+            message: "Successfully deleted.",
+        })
     } catch (err) {
         res.status(500).json({ success: false, message: "Failed to delete." })
     }
@@ -47,10 +47,10 @@ export const getSingleDoctor = async (req, res) => {
         const doctor = await Doctor.findById(id).select("-password")
 
         res.status(200).json({
-                success: true,
-                message: "Doctor found",
-                data: doctor,
-            })
+            success: true,
+            message: "Doctor found",
+            data: doctor,
+        })
     } catch (err) {
         res.status(404).json({ success: false, message: "No doctor found" })
     }
@@ -74,10 +74,10 @@ export const getAllDoctors = async (req, res) => {
         }
 
         res.status(200).json({
-                success: true,
-                message: "Doctors found",
-                data: doctors,
-            })
+            success: true,
+            message: "Doctors found",
+            data: doctors,
+        })
     } catch (err) {
         res.status(404).json({ success: false, message: "Doctors not found" })
     }
