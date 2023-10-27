@@ -2,21 +2,28 @@ import React from 'react'
 import { useState } from 'react'
 import signupImg from '../assets/images/signup.gif'
 import avatar from '../assets/images/doctor-img01.png'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import uploadImageToCloudinary from '../utils/uploadCloudinary'
+import { BASE_URL } from '../config'
+import { toast } from 'react-toastify'
+import HashLoader from 'react-spinners/HashLoader'
 
 const Signup = () => {
 
   const [selectedFile, setSelectedFile] = useState(null)
   const [previewURL, setPreviewURL] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const [formData, setFormData] = useState({
     email: '',
+    name:'',
     password: '',
     photo: selectedFile,
     gender: '',
     role: 'patient',
   })
+
+  const navigate = useNavigate()
 
   const handleInputChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -24,17 +31,41 @@ const Signup = () => {
 
   const handleFileInputChange = async (event) => {
     const file = event.target.files[0]
-
     const data = await uploadImageToCloudinary(file)
+    // console.log(data)
 
-    console.log(data)
-
-    // later add cloud
+    setPreviewURL(data.url)
+    setSelectedFile(data.url)
+    setFormData({ ...formData, photo: data.url })
   }
 
   const submitHandle = async event => {
-    console.log(formData)
     event.preventDefault()
+    setLoading(true)
+    // console.log(formData)
+
+    try {
+      const res = await fetch(`${BASE_URL}/auth/register`,
+        {
+          method: "post",
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData),
+        })
+
+      const { message } = await res.json()
+
+      if (!res.ok) {
+        throw new Error(message)
+      }
+
+      setLoading(false)
+      toast.success(message)
+      navigate('/login')
+
+    } catch (err) {
+      toast.error(err.message)
+      setLoading(false)
+    }
   }
 
   return (
@@ -112,6 +143,7 @@ const Signup = () => {
                     value={formData.gender}
                     onChange={handleInputChange}
                     className='text-textColor font-semibold text-[15px] leading-7 px-4 py-3 focus:outline-none'>
+
                     <option value="">Select</option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
@@ -121,9 +153,13 @@ const Signup = () => {
               </div>
 
               <div className="mb-5 flex items-center gap-3">
-                <figure className='w-[60px] h-[60px] rounded-full border-2 border-solid border-solid border-primaryColor flex items-center justify-center'>
-                  <img src={avatar} alt="" className='w-full rounded-full' />
-                </figure>
+                {selectedFile && <figure className='w-[60px] h-[60px] rounded-full border-2 border-solid border-solid border-primaryColor flex items-center justify-center'>
+                  <img
+                    src={previewURL}
+                    alt=""
+                    className='w-full rounded-full'
+                  />
+                </figure>}
 
                 <div className='relative w-[130px] h-[50px]'>
                   <input
@@ -146,9 +182,10 @@ const Signup = () => {
 
               <div className="mt-7">
                 <button
+                  disabled={loading && true}
                   type='submit'
                   className="w-full bg-primaryColor text-white text-[18px] leading-[30px] rounded-lg px-4 py-3">
-                  Sign Up
+                  {loading ? (<HashLoader size={35} color='#ffffff' />) : ('Sign Up')}
                 </button>
               </div>
 
@@ -162,8 +199,8 @@ const Signup = () => {
             </form>
           </div>
         </div>
-      </div>
-    </section>
+      </div >
+    </section >
   )
 }
 
