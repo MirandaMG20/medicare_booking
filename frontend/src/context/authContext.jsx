@@ -6,7 +6,7 @@ const initialState = {
     token: null,
 }
 
-export const authContext = createContext(initialState);
+export const AuthContext = createContext(initialState);
 
 const authReducer = (state, action) => {
 
@@ -40,11 +40,11 @@ const authReducer = (state, action) => {
 export const AuthContextProvider = ({ children }) => {
     const [state, dispatch] = useReducer(authReducer, initialState)
 
-    return <authContext.Provider value={{ 
+    return <AuthContext.Provider value={{ 
         user: state.user, 
         token: state.token, 
         role: state.role, 
         dispatch }}>
         {children}
-    </authContext.Provider>
+    </AuthContext.Provider>
 }

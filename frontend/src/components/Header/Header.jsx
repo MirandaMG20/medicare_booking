@@ -1,9 +1,10 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useContext } from 'react'
 import logo from '../../assets/images/logo.png'
 import userImg from '../../assets/images/avatar-icon.png'
 import { NavLink, Link } from 'react-router-dom'
 import { BiMenu } from 'react-icons/bi'
-import { authContext } from '../../context/AuthContext'
+import { AuthContext } from '../../context/AuthContext.jsx'
+
 
 const navLinks = [
   {
@@ -28,6 +29,7 @@ const Header = () => {
 
   const headerRef = useRef(null)
   const menuRef = (null)
+  const {user, role, token} = useContext(AuthContext)
 
   const handleStickyHeader = () => {
     window.addEventListener('scroll', () => {
@@ -41,9 +43,7 @@ const Header = () => {
 
   useEffect(() => {
     handleStickyHeader()
-
     return () => window.removeEventListener('scroll', handleStickyHeader)
-
   })
 
   const toggleMenu = () => menuRef.current.classList.toggle('show__menu')
@@ -85,6 +85,8 @@ const Header = () => {
                 </figure>
               </Link>
             </div>
+
+            <h1>{user?.name}</h1>
 
             <Link to='/login'>
               <button className='bg-primaryColor py-2 px-6 text-white font-[600] h-[44px] flex items-center rounded-[50px]'>
