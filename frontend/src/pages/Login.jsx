@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react'
 import { Link, useNavigate } from "react-router-dom"
 import { BASE_URL } from "../config"
 import { toast } from 'react-toastify'
-import { authContext } from '../context/authContext.jsx'
+import { authContext } from '../context/AuthContext.jsx'
 
 const Login = () => {
 
@@ -49,11 +49,11 @@ const Login = () => {
       console.log(result, 'login data')
 
       setLoading(false)
-      toast.success(message)
+      toast.success(result.message)
       navigate('/home')
 
     } catch (err) {
-      toast.error(result.message)
+      toast.error(err.message)
       setLoading(false)
     }
   }
