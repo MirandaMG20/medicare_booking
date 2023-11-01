@@ -42,17 +42,18 @@ export const AuthContextProvider = ({ children }) => {
 
     useEffect(() => {
         localStorage.setItem('user', JSON.stringify(state.user))
-        localStorage.setItem('token', JSON.stringify(state.token))
-        localStorage.setItem('role', JSON.stringify(state.role))
+        localStorage.setItem('token', state.token)
+        localStorage.setItem('role', state.role)
     }, [state])
 
     return (
-        <authContext.Provider value={{
-            user: state.user,
-            token: state.token,
-            role: state.role,
-            dispatch
-        }}>
+        <authContext.Provider
+            value={{
+                user: state.user,
+                token: state.token,
+                role: state.role,
+                dispatch
+            }}>
             {children}
         </authContext.Provider>
     )
