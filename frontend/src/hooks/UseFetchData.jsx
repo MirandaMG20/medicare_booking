@@ -21,7 +21,7 @@ const UseFetchData = (url) => {
                 const result = await res.json()
 
                 if (!res.ok) {
-                    throw new Error(result.message + '🤢')
+                    throw new Error(result.message + ' ' + '😡')
                 }
 
                 setData(result.data)
@@ -29,7 +29,7 @@ const UseFetchData = (url) => {
 
             } catch (error) {
                 setLoading(false)
-                setError(err.message)
+                setError(error.message)
             }
         }
 
@@ -37,13 +37,12 @@ const UseFetchData = (url) => {
     }, [url])
 
 
-    return (
-        {
-            data,
-            loading,
-            error,
-        }
-    )
+    return {
+        data,
+        loading,
+        error,
+    }
+
 }
 
 export default UseFetchData

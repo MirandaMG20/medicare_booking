@@ -8,6 +8,9 @@ import Profile from './Profile'
 import useGetProfile from '../../hooks/UseFetchData'
 import { BASE_URL } from '../../config'
 
+import Loading from '../../components/Loader/Loading'
+import Error from "../../components/Error/Error"
+
 const MyAccount = () => {
 
     const { dispatch } = useContext(authContext)
@@ -15,7 +18,7 @@ const MyAccount = () => {
 
     const { data: userData, loading, error } = useGetProfile(`${BASE_URL}/users/profile/me`)
 
-    console.log(userData, 'userdata')
+    console.log(userData, 'user data')
 
     const handleLogout = () => {
         dispatch({ type: 'LOGOUT' })
@@ -24,8 +27,12 @@ const MyAccount = () => {
     return (
         <section>
             <div className='max-w-[1170px] px-5 mx-auto'>
-                {
-                    !loading && !error &&
+
+                {loading && !error && <Loading />}
+
+                {error && !loading && <Error errMessage={error} />}
+
+                {!loading && !error && (
                     <div className='grid md:grid-cols-3 gap-10'>
                         <div className='pb-[50px] px-[30px] rounded-md'>
                             <div className='flex items-center justify-center'>
@@ -75,7 +82,7 @@ const MyAccount = () => {
 
                         </div>
                     </div>
-                }
+                )}
             </div>
         </section>
     )
