@@ -19,6 +19,9 @@ const MyAppointments = () => {
                     ))}
                 </div>
             )}
+
+            {!loading && !error && appointments.length === 0 &&
+                <h2>You didn't set any appointments, yet!</h2>}
         </div>
     )
 }
