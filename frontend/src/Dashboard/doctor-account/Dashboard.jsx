@@ -16,7 +16,7 @@ const Dashboard = () => {
 
         {!loading && !error && (
           <div className='grid lg:grid-cols-3 gap-[30px] lg:gap-[50px]'>
-
+              
           </div>
         )}
       </div>
