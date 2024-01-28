@@ -10,12 +10,11 @@ const useFetchData = (url) => {
 
     useEffect(() => {
         const fetchData = async () => {
-
             setLoading(true)
 
             try {
-                const res = await fetch(url, { 
-                    headers: { Authorization: `Bearer ${token}` } 
+                const res = await fetch(url, {
+                    headers: { Authorization: `Bearer ${token}` }
                 })
 
                 const result = await res.json()
@@ -26,7 +25,6 @@ const useFetchData = (url) => {
 
                 setData(result.data)
                 setLoading(false)
-
             } catch (error) {
                 setLoading(false)
                 setError(error.message)
@@ -36,13 +34,11 @@ const useFetchData = (url) => {
         fetchData()
     }, [url])
 
-
     return {
         data,
         loading,
         error,
     }
-
 }
 
 export default useFetchData
