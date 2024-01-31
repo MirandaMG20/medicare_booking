@@ -1,12 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Loader from '../../components/Loader/Loading'
 import Error from '../../components/Error/Error'
 import useGetProfile from '../../hooks/UseFetchData'
 import { BASE_URL } from '../../config'
+import Tabs from './Tabs'
 
 const Dashboard = () => {
 
   const { data, loading, error } = useGetProfile(`${BASE_URL}/doctors/profile/me`)
+
+  const [tab,setTab]=useState('overview')
 
   return (
     <section>
@@ -16,7 +19,7 @@ const Dashboard = () => {
 
         {!loading && !error && (
           <div className='grid lg:grid-cols-3 gap-[30px] lg:gap-[50px]'>
-              
+              <Tabs tab={tab} setTab={setTab} />
           </div>
         )}
       </div>
