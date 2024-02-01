@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { AiOutlineDelete } from 'react-icons/ai'
 
 const Profile = () => {
 
@@ -9,10 +10,19 @@ const Profile = () => {
         bio: '',
         gender: '',
         specialization: '',
+        fee: 0,
+        qualifications: [{
+            startDate: '',
+            endDate: '',
+            degree: '',
+            university: '',
+        }],
+        experiences: [],
+        timeSlots: [],
     })
 
     const handleInputChange = e => {
-
+        setFormData({ ...formData, [e.target.name]: e.target.value })
     }
 
     return (
@@ -101,7 +111,76 @@ const Profile = () => {
                                 <option value="dermatologist">Dermatologist</option>
                             </select>
                         </div>
+
+                        <div>
+                            <p className='form__label'>Fee*</p>
+                            <input
+                                type="number"
+                                name='fee'
+                                placeholder='$'
+                                value={formData.fee}
+                                className='form__input'
+                                onChange={handleInputChange}
+                            />
+                        </div>
                     </div>
+                </div>
+
+                <div className='mb-5'>
+                    <p className='form__label'>Qualifications*</p>
+                    {formData.qualifications?.map((item, index) => <div key={index}>
+                        <div>
+                            <div className="grid grid-cols-2 gap-5">
+                                <div>
+                                    <p className="form__label">Starting Date*</p>
+                                    <input
+                                        type="date"
+                                        name='startDate'
+                                        value={item.startDate}
+                                        className='form__input'
+                                    />
+                                </div>
+                                <div>
+                                    <p className="form__label">Ending Date*</p>
+                                    <input
+                                        type="date"
+                                        name='endDate'
+                                        value={item.endDate}
+                                        className='form__input'
+                                    />
+                                </div>
+                            </div>
+                            <div className="grid grid-cols-2 gap-5 mt-5">
+                                <div>
+                                    <p className="form__label">Degree*</p>
+                                    <input
+                                        type="text"
+                                        name='degree'
+                                        value={item.degree}
+                                        className='form__input'
+                                    />
+                                </div>
+                                <div>
+                                    <p className="form__label">University*</p>
+                                    <input
+                                        type="text"
+                                        name='university'
+                                        value={item.university}
+                                        className='form__input'
+                                    />
+                                </div>
+                            </div>
+
+                            <button className='bg-red-600 p-2 rounded-full text-white text-[18px] mt-2 mb-[30px] cursor-pointer'>
+                                <AiOutlineDelete />
+                            </button>
+                        </div>
+                    </div>
+                    )}
+
+                    <button className="bg-[#000] py-2 px-5 rounded text-white h-fit cursor-pointer">
+                        Add Qualification
+                    </button>
                 </div>
             </form>
         </div>
